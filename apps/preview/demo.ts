@@ -1,12 +1,12 @@
 import { createAuroraPlayer } from '../../src/video/create-player';
 import { attachLivingAurora } from '../../src/video/living-aurora';
-import './demo.css';
 
 const { player, video } = createAuroraPlayer({
   src: './media/aurora.mp4', poster: matchMedia('(max-width:760px)').matches ? './media/aurora-poster-640.webp' : './media/aurora-poster-1280.webp', title: 'Beyond the horizon',
   tracks: [{ src: './media/aurora-en.vtt', language: 'en', label: 'English' }, { src: './media/aurora-es.vtt', language: 'es', label: 'Español' }],
 });
 document.querySelector('#player')!.append(player);
+document.querySelectorAll('.player-placeholder, .player-boot').forEach(element => element.remove());
 const stage = document.querySelector<HTMLElement>('#stage')!;
 let aurora = attachLivingAurora(stage, video);
 const intensity = document.querySelector<HTMLInputElement>('#intensity')!;

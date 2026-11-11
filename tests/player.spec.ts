@@ -323,3 +323,39 @@ test('compact settings keeps speed accessible and retry recovers a real failed s
   await expect.poll(() => media<number>(page,'currentTime')).toBeGreaterThan(.2);
   await expect(page.getByRole('alertdialog')).not.toBeVisible();
 });
+
+test('cold boot stays dark and correctly laid out while player JavaScript is delayed', async ({ page }) => {
+  let release!: () => void;
+  const hold = new Promise<void>(resolve => { release = resolve; });
+  await page.route('**/*', async route => {
+    if (route.request().resourceType() === 'script') await hold;
+    await route.continue();
+  });
+  await page.goto('/', { waitUntil: 'commit' });
+  await expect(page.locator('style[data-aurora-critical]')).toHaveCount(1);
+  const root = await page.locator('html').evaluate(e => getComputedStyle(e).backgroundColor);
+  expect(root).toMatch(/rgb\((7, 10, 19|8, 11, 20)\)/);
+  await expect(page.locator('.player-placeholder img')).toBeVisible();
+  await expect.poll(() => page.locator('.player-placeholder img').evaluate(e => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  await expect(page.locator('.player-boot')).toHaveText('Loading player…');
+  const sky = (await page.locator('.sky').boundingBox())!;
+  expect(sky.y).toBe(0);
+  expect(await page.locator('header').evaluate(e => e.getBoundingClientRect().top)).toBe(0);
+  expect(await page.locator('video').count()).toBe(0);
+  await page.screenshot({path:'design/implementation/cold-boot-delayed-player.png'});
+  release();
+  await expect(page.locator('.player-placeholder')).toHaveCount(0);
+  await page.getByRole('button',{name:'Play',exact:true}).last().click();
+  await expect.poll(() => media<number>(page,'currentTime')).toBeGreaterThan(.2);
+});
+
+test('repeat reloads preserve dark canvas and restore the official player', async ({ page }) => {
+  await ready(page);
+  for (let i=0;i<3;i++) {
+    await page.reload();
+    await expect.poll(() => media<number>(page,'readyState')).toBeGreaterThanOrEqual(2);
+    expect(await page.locator('html').evaluate(e => getComputedStyle(e).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
+    await expect(page.locator('.player-boot')).toHaveCount(0);
+    await expect(page.getByRole('button',{name:'Play',exact:true}).last()).toBeVisible();
+  }
+});

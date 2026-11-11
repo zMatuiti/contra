@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#080b14" />
+    <meta name="color-scheme" content="dark" />
+    <style data-aurora-critical>
+      html{color-scheme:dark;background:#070a13;color:#eff1fa}body{margin:0;background:#070a13}
+      .sky{position:absolute;inset:0 0 auto;height:1000px;overflow:hidden;pointer-events:none}.sky svg{display:block;width:100%;height:100%}
+    </style>
+    <link rel="stylesheet" href="/demo.css" />
     <meta name="description" content="Aurora Skin — a cinematic, accessible custom skin built with Video.js 10. Explore reactive ambient light and frosted-glass controls." />
     <link rel="preload" as="image" href="/media/aurora-poster-640.webp" media="(max-width:760px)">
     <link rel="preload" as="image" href="/media/aurora-poster-1280.webp" media="(min-width:761px)">
@@ -20,7 +26,7 @@
     <main>
       <section id="experience" class="experience" aria-labelledby="hero-title">
         <div class="intro"><div><p class="eyebrow"><span></span>The living player</p><h1 id="hero-title">Aurora <em>Skin</em></h1><p class="lede">The picture ends. The atmosphere doesn't.</p></div><div class="edition"><span class="edition-title">Set the feeling.</span><div class="mood-selector" role="group" aria-label="Atmosphere presets"><button data-intensity="25" aria-pressed="false"><span class="preset-spark" aria-hidden="true"><i></i><i></i><i></i></span>Subtle</button><button data-intensity="55" aria-pressed="true"><span class="preset-spark" aria-hidden="true"><i></i><i></i><i></i></span>Balanced</button><button data-intensity="90" aria-pressed="false"><span class="preset-spark" aria-hidden="true"><i></i><i></i><i></i></span>Vivid</button></div><span id="preset-description" aria-live="polite">Balanced · A soft halo.</span></div></div>
-        <div class="aurora-stage" id="stage"><span class="frame-corner corner-tl" aria-hidden="true"></span><span class="frame-corner corner-br" aria-hidden="true"></span><div id="player" tabindex="-1" aria-label="Aurora video player"></div></div>
+        <div class="aurora-stage" id="stage"><span class="frame-corner corner-tl" aria-hidden="true"></span><span class="frame-corner corner-br" aria-hidden="true"></span><div id="player" tabindex="-1" aria-label="Aurora video player"><picture class="player-placeholder" aria-hidden="true"><source media="(max-width:760px)" srcset="/media/aurora-poster-640.webp"><img src="/media/aurora-poster-1280.webp" alt="" decoding="async" fetchpriority="high"></picture><span class="player-boot" role="status">Loading player…</span></div></div>
         <div class="film-meta"><div><span class="film-dot" aria-hidden="true"></span><span>Beyond the horizon</span><span class="meta-separator">/</span><span class="muted">Northern lights, Lapland</span></div><span class="film-format">Nature film <span>·</span> 02:08</span></div>
         <div class="atmosphere-toolbar" aria-label="Player appearance">
           <div class="atmosphere-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 15c4 0 4-8 8-8s4 14 12 2M2 20c4 0 4-8 8-8s4 14 12 2"/></svg><div><strong>Living Aurora</strong><span>Let the light spill beyond the frame.</span></div></div>

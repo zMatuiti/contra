@@ -30,7 +30,10 @@ h1 em { font-family: Georgia,serif; font-weight: 400; color: #c3aaf4; } h1 { col
 .lede { color: #b0bbd0; font-size: 15px; margin: 15px 0 0; }
 .edition { display: grid; text-align: right; gap: 8px; padding-bottom: 4px; color: #b6bdd0; font-size: 12px; }
 .edition > span:last-child { font: 12px 'Cascadia Code',ui-monospace,monospace; color: #8893ab; }
-#player { aspect-ratio: 16 / 9; border-radius: 28px; background: #101726; box-shadow: 0 32px 100px #0008, 0 0 0 1px #ffffff12; }
+#player { position: relative; aspect-ratio: 16 / 9; border-radius: 28px; background: #101726; box-shadow: 0 32px 100px #0008, 0 0 0 1px #ffffff12; }
+.player-placeholder { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
+.player-placeholder img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.player-boot { position: absolute; bottom: 24px; left: 24px; padding: 9px 13px; border-radius: 9px; color: #edf2ff; background: #0d1428e6; font-size: 13px; }
 #player video-player { display: block; width: 100%; height: 100%; }
 .film-meta { display: flex; justify-content: space-between; gap: 16px; margin: 19px 3px 28px; font-size: 12px; }
 .film-meta > div { display: flex; align-items: center; gap: 10px; }

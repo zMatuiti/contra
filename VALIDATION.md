@@ -62,3 +62,8 @@ Historical audit findings in design/audit-2026-11-11.md predate these fixes. New
 ## Public-origin verification
 
 All 23 browser scenarios also passed at https://aurora-skin-player.vercel.app in fresh Chrome contexts without credentials. Result: design/live-test-results.json. An independent anonymous HTTP request returned 200; the MP4 returned 206 for a 1,024-byte request with correct Content-Range. The repository is public and connected to Vercel. These checks emulate mobile touch; no physical handset or Safari run was performed.
+
+
+## Reload regression fix
+
+A constrained local reload reproduced an unstyled white canvas and oversized SVG before player JavaScript loaded. The page now links its stylesheet in the HTML head, sets an inline critical dark canvas, and provides a responsive static poster with a boot status until the real player mounts. The same constrained local check recorded zero unstyled white-canvas frames after the fix. All 25 local production browser scenarios passed, including delayed player scripts followed by actual playback and three repeated reloads. See design/reload-fix.md and design/production-test-results.json.
