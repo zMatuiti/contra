@@ -1,0 +1,1 @@
+import {chromium} from '@playwright/test';const b=await chromium.launch({channel:'chrome'});const p=await b.newPage({viewport:{width:1440,height:1000}});await p.goto('http://127.0.0.1:4173/preview.html');await p.getByRole('button',{name:'Playback speed',exact:true}).click();console.log((await p.locator('body').ariaSnapshot()).slice(0,5000));await b.close();

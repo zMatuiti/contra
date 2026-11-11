@@ -1,0 +1,13 @@
+import { chromium } from '@playwright/test';
+const browser = await chromium.launch({channel:'chrome',headless:true});
+const page = await browser.newPage({viewport:{width:1440,height:1100}});
+page.on('pageerror', e=>console.log('PAGE ERROR',e.message));
+await page.goto('http://127.0.0.1:5173');
+await page.waitForTimeout(1500);
+console.log(await page.locator('video').evaluate(v=>({ready:v.readyState,duration:v.duration,error:v.error?.message})));
+console.log(await page.locator('media-play-button').allTextContents());
+console.log((await page.locator('#player').ariaSnapshot()).slice(0,6000));
+await page.screenshot({path:'design/implementation/desktop.png',fullPage:true});
+await page.setViewportSize({width:390,height:844});
+await page.screenshot({path:'design/implementation/mobile.png',fullPage:true});
+await browser.close();

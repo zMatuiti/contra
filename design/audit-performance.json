@@ -1,0 +1,53 @@
+{
+  "paint": {
+    "lcp": 2128,
+    "cls": 0
+  },
+  "resources": [
+    {
+      "name": "aurora-poster-640.webp",
+      "transfer": 12206,
+      "duration": 398
+    },
+    {
+      "name": "demo-QgR1cFjO.js",
+      "transfer": 2756,
+      "duration": 220
+    },
+    {
+      "name": "modulepreload-polyfill-P2Xu9kJm.js",
+      "transfer": 970,
+      "duration": 187
+    },
+    {
+      "name": "skin-DYsv4pzh.js",
+      "transfer": 67765,
+      "duration": 690
+    },
+    {
+      "name": "skin-Dm0YI7sb.css",
+      "transfer": 10363,
+      "duration": 365
+    },
+    {
+      "name": "demo-D3-D00t0.css",
+      "transfer": 4131,
+      "duration": 267
+    },
+    {
+      "name": "aurora-poster-640.webp",
+      "transfer": 300,
+      "duration": 181
+    },
+    {
+      "name": "aurora.mp4",
+      "transfer": 300,
+      "duration": 1000
+    },
+    {
+      "name": "aurora.svg",
+      "transfer": 509,
+      "duration": 172
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+import { chromium } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+const browser=await chromium.launch({channel:'chrome'});const context=await browser.newContext({viewport:{width:390,height:844}});const page=await context.newPage();
+await page.addInitScript(()=>{addEventListener('pageshow',e=>window.restored=e.persisted)});
+await page.goto('http://127.0.0.1:4173');await page.waitForFunction(()=>document.querySelector('video').readyState>=2);
+await page.getByRole('button',{name:'Focus mode',exact:true}).click();const a=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();console.log('FOCUS_MODE_AXE',a.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})));
+await page.getByRole('link',{name:'Film & image credits'}).click();await page.goBack();await page.waitForFunction(()=>document.querySelector('video').readyState>=2);console.log('BACK_CACHE_RESTORED',await page.evaluate(()=>window.restored));
+await page.locator('media-play-button').last().focus();await page.keyboard.press('Enter');await page.waitForTimeout(800);console.log('AFTER_BACK_AMBIENT',await page.locator('#stage').evaluate(e=>({motion:e.dataset.auroraMotion,sampling:e.dataset.auroraSampling,playing:!e.querySelector('video').paused})));
+await page.route('**/media/aurora.mp4',r=>r.fulfill({status:404,body:''}));await page.goto('http://127.0.0.1:4173');await page.getByRole('alertdialog').waitFor();await page.getByRole('button',{name:'Dismiss',exact:true}).click();await page.waitForTimeout(500);console.log('DIALOG_AFTER_OK',await page.getByRole('alertdialog').count(), await page.locator('media-error-dialog').getAttribute('data-open'));
+await browser.close();

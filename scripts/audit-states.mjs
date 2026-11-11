@@ -1,0 +1,17 @@
+import { chromium } from '@playwright/test';
+import fs from 'node:fs/promises';
+const browser=await chromium.launch({channel:'chrome'});const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});const page=await context.newPage();
+const cdp=await context.newCDPSession(page);await cdp.send('Network.enable');await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:150,downloadThroughput:200000,uploadThroughput:100000});await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});
+await page.addInitScript(()=>{window.auditPerf={lcp:0,cls:0};new PerformanceObserver(l=>{for(const e of l.getEntries())window.auditPerf.lcp=e.startTime;}).observe({type:'largest-contentful-paint',buffered:true});new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)window.auditPerf.cls+=e.value;}).observe({type:'layout-shift',buffered:true});});
+await page.goto('http://127.0.0.1:4173');await page.waitForTimeout(7000);
+const perf=await page.evaluate(()=>({paint:window.auditPerf,resources:performance.getEntriesByType('resource').map(e=>({name:e.name.split('/').pop(),transfer:e.transferSize,duration:Math.round(e.duration)}))}));
+console.log('THROTTLED_LOCAL',JSON.stringify(perf));await fs.writeFile('design/audit-performance.json',JSON.stringify(perf,null,2));
+await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:0,downloadThroughput:-1,uploadThroughput:-1});await cdp.send('Emulation.setCPUThrottlingRate',{rate:1});
+await page.goto('http://127.0.0.1:4173');await page.waitForFunction(()=>document.querySelector('video').readyState>=2);
+await page.getByRole('button',{name:'Play',exact:true}).last().tap();
+const videoBox=await page.locator('media-container').boundingBox();
+await page.touchscreen.tap(videoBox.x+videoBox.width*.8,videoBox.y+videoBox.height*.27);await page.waitForTimeout(90);await page.touchscreen.tap(videoBox.x+videoBox.width*.8,videoBox.y+videoBox.height*.27);
+await page.waitForTimeout(400);console.log('DOUBLE_TAP_TIME',await page.locator('video').evaluate(v=>v.currentTime));
+await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight));await page.waitForTimeout(600);console.log('OFFSCREEN',await page.locator('#stage').getAttribute('data-aurora-motion'));
+await page.route('**/media/aurora.mp4',r=>r.fulfill({status:404,body:''}));await page.goto('http://127.0.0.1:4173');await page.getByRole('alertdialog').waitFor();console.log('ERROR_COPY',await page.getByRole('alertdialog').innerText());await page.getByRole('button',{name:'Dismiss',exact:true}).tap();console.log('AFTER_DISMISS',await page.locator('#player').ariaSnapshot());
+await browser.close();

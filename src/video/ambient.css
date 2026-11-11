@@ -1,0 +1,14 @@
+@property --aurora-left { syntax: '<color>'; inherits: true; initial-value: #37cce9; }
+@property --aurora-right { syntax: '<color>'; inherits: true; initial-value: #a47bf5; }
+@property --aurora-opacity { syntax: '<number>'; inherits: true; initial-value: .55; }
+@property --aurora-spread { syntax: '<length>'; inherits: true; initial-value: 28px; }
+.aurora-stage { position: relative; isolation: isolate; --aurora-opacity: .55; --aurora-energy: .82; --aurora-x: 30%; --aurora-spread: 28px; transition: --aurora-left 800ms ease-out, --aurora-right 800ms ease-out, --aurora-opacity 350ms ease-out, --aurora-spread 350ms ease-out; }
+/* Wide room wash and a tighter frame bloom. Neither covers the film. */
+.aurora-stage::before,.aurora-stage::after { content: ''; position: absolute; z-index: -1; pointer-events: none; border-radius: 36px; opacity: calc(var(--aurora-opacity) * var(--aurora-energy)); }
+.aurora-stage::before { inset: calc(-1 * var(--aurora-spread)) -34px; filter: blur(44px); background: radial-gradient(ellipse at 3% 40%,var(--aurora-left),transparent 63%),radial-gradient(ellipse at 98% 60%,var(--aurora-right),transparent 63%),radial-gradient(ellipse at var(--aurora-x) 100%,var(--aurora-left),transparent 66%); }
+.aurora-stage::after { inset: -5px; filter: blur(18px); border-radius: 28px; background: linear-gradient(115deg,var(--aurora-left),var(--aurora-right)); opacity: calc(var(--aurora-opacity) * .8); }
+.aurora-stage[data-aurora-motion='true']::before { animation: aurora-breathe 12s ease-in-out infinite alternate; }
+@keyframes aurora-breathe { from { transform: translate3d(-.5%,0,0) scale(.99); } to { transform: translate3d(.5%,1%,0) scale(1.02); } }
+@media(max-width:760px) { .aurora-stage::before { inset-inline: -10px; filter: blur(28px); } .aurora-stage::after { filter: blur(12px); } }
+@media(prefers-reduced-motion:reduce) { .aurora-stage { transition: none; } .aurora-stage::before,.aurora-stage::after { animation:none !important; transform:none; } }
+@media(forced-colors:active) { .aurora-stage::before,.aurora-stage::after { display:none; } }

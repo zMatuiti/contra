@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080b14" />
+    <meta name="description" content="Aurora Skin — a cinematic, accessible custom skin built with Video.js 10. Explore reactive ambient light and frosted-glass controls." />
+    <link rel="preload" as="image" href="/media/aurora-poster-640.webp" media="(max-width:760px)">
+    <link rel="preload" as="image" href="/media/aurora-poster-1280.webp" media="(min-width:761px)">
+    <title>Aurora Skin — light follows the story</title>
+    <link rel="icon" type="image/svg+xml" href="/aurora.svg" />
+  </head>
+  <body><div class="sky" aria-hidden="true"><svg viewBox="0 0 1600 1000" preserveAspectRatio="none"><defs><linearGradient id="rc"><stop stop-color="#11a9cf" stop-opacity="0"/><stop offset=".55" stop-color="#38d8fa" stop-opacity=".75"/><stop offset="1" stop-color="#7c6fe7" stop-opacity="0"/></linearGradient><linearGradient id="rv"><stop stop-color="#6a37c8" stop-opacity="0"/><stop offset=".6" stop-color="#9868ee" stop-opacity=".65"/><stop offset="1" stop-color="#cf93ff" stop-opacity="0"/></linearGradient><filter id="rb"><feGaussianBlur stdDeviation="16"/></filter></defs><path d="M-200 430C220 480 150 40 730-80" stroke="url(#rc)" stroke-width="70" fill="none" filter="url(#rb)"/><path d="M970-100C1020 150 1280 250 1720 20" stroke="url(#rv)" stroke-width="120" fill="none" filter="url(#rb)"/><path d="M-200 430C220 480 150 40 730-80" stroke="url(#rc)" stroke-width="1" fill="none"/></svg></div>
+    <a class="skip-link" href="#player">Skip to player</a>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Aurora Skin home"><svg viewBox="0 0 48 32" aria-hidden="true"><defs><linearGradient id="mark"><stop stop-color="#58e4f2"/><stop offset="1" stop-color="#ae87f8"/></linearGradient></defs><path d="M2 25C12 25 12 5 22 5S32 33 46 16C36 42 28 18 20 16S11 28 2 25Z" fill="url(#mark)"/></svg>Aurora<span>Skin</span></a>
+      <nav aria-label="Main navigation"><a href="#experience" class="current">Experience</a><a href="#integration">Integration</a><a href="/workbench.html">Workbench <span aria-hidden="true">↗</span></a></nav>
+      <a class="header-link" href="https://videojs.org/docs/framework/html/guides/build-your-own-skin" target="_blank" rel="noreferrer">Built with Video.js <span>10</span> <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <section id="experience" class="experience" aria-labelledby="hero-title">
+        <div class="intro"><div><p class="eyebrow"><span></span>The living player</p><h1 id="hero-title">Aurora <em>Skin</em></h1><p class="lede">The picture ends. The atmosphere doesn't.</p></div><div class="edition"><span class="edition-title">Set the feeling.</span><div class="mood-selector" role="group" aria-label="Atmosphere presets"><button data-intensity="25" aria-pressed="false"><span class="preset-spark" aria-hidden="true"><i></i><i></i><i></i></span>Subtle</button><button data-intensity="55" aria-pressed="true"><span class="preset-spark" aria-hidden="true"><i></i><i></i><i></i></span>Balanced</button><button data-intensity="90" aria-pressed="false"><span class="preset-spark" aria-hidden="true"><i></i><i></i><i></i></span>Vivid</button></div><span id="preset-description" aria-live="polite">Balanced · A soft halo.</span></div></div>
+        <div class="aurora-stage" id="stage"><span class="frame-corner corner-tl" aria-hidden="true"></span><span class="frame-corner corner-br" aria-hidden="true"></span><div id="player" tabindex="-1" aria-label="Aurora video player"></div></div>
+        <div class="film-meta"><div><span class="film-dot" aria-hidden="true"></span><span>Beyond the horizon</span><span class="meta-separator">/</span><span class="muted">Northern lights, Lapland</span></div><span class="film-format">Nature film <span>·</span> 02:08</span></div>
+        <div class="atmosphere-toolbar" aria-label="Player appearance">
+          <div class="atmosphere-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 15c4 0 4-8 8-8s4 14 12 2M2 20c4 0 4-8 8-8s4 14 12 2"/></svg><div><strong>Living Aurora</strong><span>Let the light spill beyond the frame.</span></div></div>
+          <div class="atmosphere-controls"><label class="intensity-control" for="intensity"><span>Intensity</span><input id="intensity" aria-label="Intensity" type="range" min="0" max="100" value="55" step="5"/><output id="intensity-value" for="intensity">55%</output></label><span class="toolbar-divider"></span><button id="ambient-toggle" class="switch-label" aria-pressed="true">Ambient light <span class="toggle" aria-hidden="true"></span></button><button id="focus-toggle" class="switch-label" aria-pressed="false">Focus mode <span class="toggle" aria-hidden="true"></span></button></div>
+        </div>
+        <p class="experience-note"><span>Designed to disappear. Made to be felt.</span><button id="shortcuts-open" aria-haspopup="dialog"><span aria-hidden="true">⌘</span> Keyboard shortcuts</button></p>
+      </section>
+      <section id="integration" class="integration" aria-labelledby="integration-title"><div><p class="eyebrow">Your film. Your atmosphere.</p><h2 id="integration-title">Built for the story.<br><em>Down to the last detail.</em></h2><p>Composed from official Video.js controls. Bring your own media, keep the details that make watching feel effortless.</p><a class="text-link" href="/workbench.html">Explore the workbench <span aria-hidden="true">↗</span></a></div><div class="code-panel"><div><span>TypeScript · Video.js 10</span><button id="copy-code" aria-label="Copy integration example">Copy <span aria-hidden="true">⧉</span></button></div><pre tabindex="0" role="region" aria-label="Integration code"><code id="integration-code">import { createAuroraPlayer } from './src/video/create-player';
+
+const { player } = createAuroraPlayer({
+  src: '/media/aurora.mp4',
+  title: 'Your story',
+});
+
+document.querySelector('#player').append(player);</code></pre><p>See README.md for the complete, working integration.</p></div></section>
+    </main>
+    <footer><span class="footer-brand">Aurora Skin <span>Light, in motion.</span></span><a href="/credits.html">Film & image credits</a><span>Crafted for Video.js 10</span></footer>
+    <dialog id="shortcuts"><div class="dialog-heading"><h2>Make yourself at home.</h2><button id="shortcuts-close" aria-label="Close keyboard shortcuts">×</button></div><p>Focus the player to use these shortcuts.</p><dl><div><dt>Play / pause</dt><dd><kbd>Space</kbd> or <kbd>K</kbd></dd></div><div><dt>Seek backward / forward</dt><dd><kbd>←</kbd> <kbd>→</kbd></dd></div><div><dt>Volume</dt><dd><kbd>↑</kbd> <kbd>↓</kbd></dd></div><div><dt>Mute</dt><dd><kbd>M</kbd></dd></div><div><dt>Captions</dt><dd><kbd>C</kbd></dd></div><div><dt>Fullscreen</dt><dd><kbd>F</kbd></dd></div><div><dt>Navigate controls</dt><dd><kbd>Tab</kbd></dd></div></dl><p>On touch: tap to reveal controls. Double-tap the left or right side to seek.</p></dialog>
+    <div id="toast" role="status" class="toast"></div>
+    <script type="module" src="/demo.ts"></script>
+  </body>
+</html>
