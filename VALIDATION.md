@@ -42,10 +42,10 @@ The main aurora film is silent. Volume state is tested, and an audio-bearing fix
 - Physical Android/iPhone touch, Safari/WebKit, Firefox, native iOS fullscreen and real device performance.
 - Screen-reader interaction, all languages/RTL combinations, every shipped default shortcut, touch double-tap gestures, picture-in-picture, casting or AirPlay. Casting/AirPlay affordances were intentionally removed because no receiver integration is configured.
 - A real third-party non-CORS source, HLS/Mux asset, Mux account upload or API credentials.
-- A published Vercel origin, production HTTP range delivery, public project integration or contest submission.
+- A separate real-site/portfolio integration or contest submission; the public Vercel origin and range delivery have now been verified (see DEPLOYMENT.md).
 - Full WCAG conformance, contest eligibility, dates, judging scores, bonus qualification or a guaranteed prize.
 
-The Vercel configuration and local production build are ready; deployment remains a separate operation. No live hosting or commercial validation is implied by local browser evidence.
+Public deployment was completed and checked separately; see DEPLOYMENT.md. Local and live browser checks do not establish commercial validation or a judging score.
 
 
 ## Refinement pass
@@ -57,3 +57,8 @@ The local production suite now includes 23 scenarios, including actual retry aft
 Under the same single local lab profile (150ms latency, 200,000 B/s download, CPU 4x), LCP changed from 5,360ms to 2,128ms, with CLS 0. This is not a field CWV claim. The mobile poster changed from 482,993 bytes to 11,906 bytes; desktop is 53,978 bytes. The old JPEG is outside deployed public assets, and the build no longer installs the ffmpeg tool used only for preparing media.
 
 Historical audit findings in design/audit-2026-11-11.md predate these fixes. New deployment evidence will be recorded separately in DEPLOYMENT.md. Physical-device and cross-browser/screen-reader validation remain outstanding. Mux and real-site bonus qualification remain unverified; no score is guaranteed.
+
+
+## Public-origin verification
+
+All 23 browser scenarios also passed at https://aurora-skin-player.vercel.app in fresh Chrome contexts without credentials. Result: design/live-test-results.json. An independent anonymous HTTP request returned 200; the MP4 returned 206 for a 1,024-byte request with correct Content-Range. The repository is public and connected to Vercel. These checks emulate mobile touch; no physical handset or Safari run was performed.

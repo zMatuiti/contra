@@ -4,7 +4,7 @@ An original cinematic HTML skin for **Video.js 10.3.0**, created with the offici
 
 ![Aurora Skin desktop preview](design/implementation/desktop.png)
 
-[Mobile preview](design/implementation/mobile.png) · [Validation](VALIDATION.md) · [Apache 2.0](LICENSE)
+[Live demo](https://aurora-skin-player.vercel.app) · [Public source](https://github.com/zMatuiti/contra) · [Mobile preview](design/implementation/mobile.png) · [Validation](VALIDATION.md) · [Apache 2.0](LICENSE)
 
 ## Run
 
@@ -98,9 +98,9 @@ Browser tests use Playwright with installed Google Chrome (`channel: chrome`) an
 
 ## Vercel
 
-The project is configured for a public Vercel deployment; the current published URL and live verification will be recorded after deployment. Import this directory as the project root. `vercel.json` sets Vite, `npm run build`, and `dist`. `npm ci` uses the lockfile. There are no required environment variables, server functions, account dependencies or runtime secrets for the local-media demo. Build includes the demo, credits, workbench and standalone preview.
+Published at **https://aurora-skin-player.vercel.app**. The Vercel project is connected to this public GitHub repository, has authentication protection disabled, and builds on Node.js 24. See [DEPLOYMENT.md](DEPLOYMENT.md) for anonymous access and live playback evidence. Import this directory as the project root. `vercel.json` sets Vite, `npm run build`, and `dist`. `npm ci` uses the lockfile. There are no required environment variables, server functions, account dependencies or runtime secrets for the local-media demo. Build includes the demo, credits, workbench and standalone preview.
 
-To publish yourself, run `npm run deploy vercel`; the host CLI handles sign-in. Recheck real playback, HTTP range responses, fullscreen and captions on the deployed origin. Deployment, Mux upload, contest submission, eligibility, deadlines, judging score and public-project bonus are not established by local tests.
+To publish yourself, run `npm run deploy vercel`; the host CLI handles sign-in. Recheck real playback, HTTP range responses, fullscreen and captions on the deployed origin. The public origin was separately verified with the browser suite and HTTP range checks. Mux upload, contest submission, eligibility, judging score and real-site bonus qualification remain unverified.
 
 ## Source map
 
