@@ -7,7 +7,7 @@ Built with official Video.js 10.3.0 player state, controls, sliders, menus, hotk
 Demo: https://aurora-skin-player.vercel.app
 Source: https://github.com/zMatuiti/contra
 
-Validation: 23 automated scenarios passed locally and on the public origin in Chrome, including real playback and emulated touch. Physical-device, Safari and screen-reader testing remain outstanding.
+Validation: 25 automated scenarios passed locally and on the public origin in Chrome, including real playback and emulated touch. Physical-device, Safari and screen-reader testing remain outstanding.
 
 Bonus status: Mux public playback ID not configured; separate real-site integration not verified. Do not claim these points or a guaranteed score. This file is preparation text, not a submitted entry or acceptance of challenge terms.
 

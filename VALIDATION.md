@@ -67,3 +67,5 @@ All 23 browser scenarios also passed at https://aurora-skin-player.vercel.app in
 ## Reload regression fix
 
 A constrained local reload reproduced an unstyled white canvas and oversized SVG before player JavaScript loaded. The page now links its stylesheet in the HTML head, sets an inline critical dark canvas, and provides a responsive static poster with a boot status until the real player mounts. The same constrained local check recorded zero unstyled white-canvas frames after the fix. All 25 local production browser scenarios passed, including delayed player scripts followed by actual playback and three repeated reloads. See design/reload-fix.md and design/production-test-results.json.
+
+The reload-fix deployment was then validated at the public origin: **25/25 scenarios passed**, with no retries, including cold boot with held scripts and three consecutive reloads. A separate cache-disabled, throttled check recorded zero transparent-canvas frames in both local development and the published page. See design/live-test-results.json and design/boot-live-after.json.
